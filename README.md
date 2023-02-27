@@ -170,3 +170,13 @@ The mod's [**Github**](https://github.com/donkeyrat/MFD) is the only place to vi
 ## Credits
 
 This mod was made by the Shadow Modding Elite, a team of the greatest TABS modders.
+
+__Maples - Coder__
+
+__BD - Coder__
+
+__Arargd - Coder__
+
+__Fern - Coder__
+
+__Harren Tonderen - Icon Artist__
