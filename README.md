@@ -1,4 +1,4 @@
-﻿
+
 # Modding For Dummies
 
 Modding For Dummies is a mod template that allows you to create your very own TABS mod. It contains a simplified space for you to code factions, units, weapons, abilities, and clothing items.
@@ -169,7 +169,7 @@ The mod's [**Github**](https://github.com/donkeyrat/MFD) is the only place to vi
 
 ## Credits
 
-This mod was made by the Shadow Modding Elite, a team of the best of TABS modders.
+This mod was made by the Shadow Modding Elite, a team of the greatest TABS modders.
 
 __Maples - Coder__
 
