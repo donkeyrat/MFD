@@ -21,22 +21,22 @@ namespace ModdingForDummies.TABSSimp
 
         public void Colors(params Color[] colors)
         {
-            for (int i = 0; i < colors.Length; i++) Color(i, colors[i]);
+            for (var i = 0; i < colors.Length; i++) Color(i, colors[i]);
         }
 
         public void Colors(params string[] colors)
         {
-            for (int i = 0; i < colors.Length; i++) Color(i, Utilities.HexColor(colors[i]));
+            for (var i = 0; i < colors.Length; i++) Color(i, Utilities.HexColor(colors[i]));
         }
 
         public void Colors(params (Color color, float glow)[] colors)
         {
-            for (int i = 0; i < colors.Length; i++) Color(i, colors[i].color, colors[i].glow);
+            for (var i = 0; i < colors.Length; i++) Color(i, colors[i].color, colors[i].glow);
         }
 
         public void Colors(params (string color, float glow)[] colors)
         {
-            for (int i = 0; i < colors.Length; i++) Color(i, Utilities.HexColor(colors[i].color), colors[i].glow);
+            for (var i = 0; i < colors.Length; i++) Color(i, Utilities.HexColor(colors[i].color), colors[i].glow);
         }
     }
 }

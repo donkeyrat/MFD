@@ -81,7 +81,7 @@ namespace ModdingForDummies.TABSSimp
         private static M CreateObject<M>(string key, Func<string, M> query, Action<M> processClone, string name, string originalName) where M : ModdingClass<M>
         {
             M result = null;
-            M original = query(originalName);
+            var original = query(originalName);
 
             if (original != null)
             {
@@ -95,7 +95,7 @@ namespace ModdingForDummies.TABSSimp
 
         private static M GetObject<M, R>(string key, Func<string, R> query, Func<R, M> generate, string name)
         {
-            M result = default(M);
+            var result = default(M);
 
             if (modified[key].ContainsKey(name))
             {
@@ -107,7 +107,7 @@ namespace ModdingForDummies.TABSSimp
             }   
             else
             {
-                R queried = query(name);
+                var queried = query(name);
 
                 if(queried != null)
                 {

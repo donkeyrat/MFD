@@ -20,7 +20,7 @@ namespace ModdingForDummies.TABSSimp
 
         public void Add(string itemName)
         {
-            T item = query(itemName);
+            var item = query(itemName);
             internalObject.Add(item);
             onUpdate(internalObject);
         }
@@ -39,7 +39,7 @@ namespace ModdingForDummies.TABSSimp
         {
             foreach(var itemName in itemNames)
             {
-                T item = query(itemName);
+                var item = query(itemName);
                 internalObject.Add(item);
             }
             
@@ -54,7 +54,7 @@ namespace ModdingForDummies.TABSSimp
 
         public void AddCloned(string itemName)
         {
-            T item = query(itemName);
+            var item = query(itemName);
             internalObject.Add(item.Clone());
             onUpdate(internalObject);
         }
@@ -73,7 +73,7 @@ namespace ModdingForDummies.TABSSimp
         {
             foreach(var itemName in itemNames)
             {
-                T item = query(itemName);
+                var item = query(itemName);
                 internalObject.Add(item.Clone());
             }
             
@@ -115,7 +115,7 @@ namespace ModdingForDummies.TABSSimp
         private void ListSet(List<T> list)
         {
             internalObject.Clear();
-            foreach(T item in list) internalObject.Add(item);
+            foreach(var item in list) internalObject.Add(item);
             onUpdate(internalObject);
         }
 

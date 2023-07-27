@@ -59,7 +59,7 @@ namespace ModdingForDummies.TABSSimp
         {
             get
             {
-                Vector3 scale = internalObject.transform.localScale;
+                var scale = internalObject.transform.localScale;
                 return (scale.x + scale.y + scale.z) / 3f;
             }
             set => Utilities.SetClothScale(this, Vector3.one * value);

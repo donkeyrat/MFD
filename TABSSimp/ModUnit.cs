@@ -132,7 +132,7 @@ namespace ModdingForDummies.TABSSimp
             get => rightWeapon;
             set
             {
-                if(value != null)
+                if (value != null)
                 {
                     rightWeapon = value;
                     internalObject.RightWeapon = rightWeapon.internalObject;
@@ -146,7 +146,7 @@ namespace ModdingForDummies.TABSSimp
             get => leftWeapon;
             set
             {
-                if(value != null)
+                if (value != null)
                 {
                     leftWeapon = value;
                     internalObject.LeftWeapon = leftWeapon.internalObject;
@@ -154,14 +154,14 @@ namespace ModdingForDummies.TABSSimp
             }
         }
 
-        private ModBase UnitBase;
+        private ModBase unitBase;
         public ModBase Base
         {
-            get => UnitBase;
+            get => unitBase;
             set
             {
-                UnitBase = value;
-                internalObject.UnitBase = UnitBase.internalObject;
+                unitBase = value;
+                internalObject.UnitBase = unitBase.internalObject;
             }
         }
 
@@ -214,12 +214,12 @@ namespace ModdingForDummies.TABSSimp
 
         public override ModUnit Clone()
         {
-            string name = Utilities.IncrementName(Name);
+            var name = Utilities.IncrementName(Name);
             var unit = Object.Instantiate(internalObject);
             unit.Entity.GUID = DatabaseID.NewID();
             unit.Entity.Name = name;
             Utilities.AddUnitToDatabase(unit);
-            ModUnit clone = new ModUnit(unit)
+            var clone = new ModUnit(unit)
             {
                 Clothes =
                 {

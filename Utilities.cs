@@ -32,7 +32,7 @@ namespace ModdingForDummies
 
         public static readonly Quaternion blenderToUnity = Quaternion.Euler(-90f, 0f, 0f);
 
-        public static readonly string rootPath = Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString();
+        public static readonly string rootPath = Assembly.GetExecutingAssembly().Location;
         public static Dictionary<string, string> language = Localizer.GetLanguage(Localizer.Language.LANG_EN_US);
         
         public static readonly ContentDatabase fullDatabase = ContentDatabase.Instance();
@@ -155,7 +155,7 @@ namespace ModdingForDummies
 
         public static void SetField<T>(this T instance, string fieldName, object newValue, BindingFlags flags = (BindingFlags)(-1))
         {
-            FieldInfo field = typeof(T).GetField(fieldName, flags);
+            var field = typeof(T).GetField(fieldName, flags);
             Debug.Log(field);
             try
             {
@@ -176,7 +176,7 @@ namespace ModdingForDummies
             }
             if (t.childCount > 0)
             {
-                for (int i = 0; i < t.childCount; i++)
+                for (var i = 0; i < t.childCount; i++)
                 {
                     t.GetChild(i).SetHideFlagsChildren(hf);
                 }
@@ -195,8 +195,8 @@ namespace ModdingForDummies
             {
                 return null;
             }
-            byte[] data = File.ReadAllBytes(path);
-            Texture2D texture2D = new Texture2D(1, 1);
+            var data = File.ReadAllBytes(path);
+            var texture2D = new Texture2D(1, 1);
             texture2D.LoadImage(data);
             texture2D.filterMode = FilterMode.Point;
             return Sprite.Create(texture2D, new Rect(0f, 0f, texture2D.width, texture2D.height), new Vector2(0, 0), 1f);
@@ -304,10 +304,10 @@ namespace ModdingForDummies
 
         public static void SetMeshRenderers(GameObject gameObject, bool enabled)
         {
-            Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
-            for (int i = 0; i < renderers.Length; i++)
+            var renderers = gameObject.GetComponentsInChildren<Renderer>();
+            for (var i = 0; i < renderers.Length; i++)
             {
-                Type rendererType = renderers[i].GetType();
+                var rendererType = renderers[i].GetType();
                 if(rendererType == typeof(MeshRenderer) || rendererType == typeof(SkinnedMeshRenderer))
                 {
                     renderers[i].enabled = enabled;
@@ -334,18 +334,18 @@ namespace ModdingForDummies
 
             if (bestRenderer)
             {
-                for (int i = 0; i < rMaterials.Length; i++) if(i == index) lodDictionary[rMaterials[i].color] = newMaterial;
+                for (var i = 0; i < rMaterials.Length; i++) if(i == index) lodDictionary[rMaterials[i].color] = newMaterial;
                 if (renderers != null && renderers.Length > 0)
                 {
                     if (isLOD)
                     {
-                        foreach (Renderer renderer in renderers)
+                        foreach (var renderer in renderers)
                         {
-                            List<TeamColor> teamColors = renderer.GetComponents<TeamColor>().ToList();
-                            List<TeamColor> removed = new List<TeamColor>();
-                            Material[] thisMaterials = renderer.materials;
-                            List<Material> dictMaterials = new List<Material>();
-                            for (int i = 0; i < thisMaterials.Length; i++)
+                            var teamColors = renderer.GetComponents<TeamColor>().ToList();
+                            var removed = new List<TeamColor>();
+                            var thisMaterials = renderer.materials;
+                            var dictMaterials = new List<Material>();
+                            for (var i = 0; i < thisMaterials.Length; i++)
                             {
                                 Material replacement = null;
                                 if (lodDictionary.ContainsKey(thisMaterials[i].color)) replacement = lodDictionary[thisMaterials[i].color];
@@ -370,12 +370,12 @@ namespace ModdingForDummies
                         {
                             var thisMaterials = renderer.materials;
                             var teamColors = renderer.GetComponents<TeamColor>().ToList();
-                            for (int i = 0; i < thisMaterials.Length; i++)
+                            for (var i = 0; i < thisMaterials.Length; i++)
                             {
                                 if (offset + i == index)
                                 {
                                     thisMaterials[i] = newMaterial;
-                                    foreach (TeamColor tc in teamColors)
+                                    foreach (var tc in teamColors)
                                     {
                                         if (tc.materialID == i) Object.DestroyImmediate(tc);
                                     }
@@ -402,7 +402,7 @@ namespace ModdingForDummies
             }
             if (internalProp.GetComponentInChildren<SkinnedMeshRenderer>() != null)
             {
-                Vector3 locScale = internalProp.transform.localScale;
+                var locScale = internalProp.transform.localScale;
                 foreach (var v in internalProp.GetComponentsInChildren<SkinnedMeshRenderer>())
                 {
                     v.sharedMesh = Object.Instantiate(v.sharedMesh);
@@ -448,7 +448,7 @@ namespace ModdingForDummies
             {
                 if (candidate.GetType() == rendererType || rendererType == typeof(Renderer))
                 {
-                    string name = candidate.gameObject.name;
+                    var name = candidate.gameObject.name;
                     if (name.Contains("LOD0"))
                     {
                         renderer = candidate;
@@ -483,7 +483,7 @@ namespace ModdingForDummies
             {
                 if (!chosen.Contains(candidate) && (candidate.GetType() == rendererType || rendererType == typeof(Renderer)))
                 {
-                    string wName = gameObject.name;
+                    var wName = gameObject.name;
                     if (wName.Contains("LOD") && candidate.transform.parent.name.ToLower().Contains("base"))
                     {
                         chosen.Add(candidate);
@@ -566,8 +566,8 @@ namespace ModdingForDummies
         
         public static void AddUnitToDatabase(UnitBlueprint unit)
         {
-            Dictionary<DatabaseID, Object> nonStreamableAssets = (Dictionary<DatabaseID, Object>)typeof(AssetLoader).GetField("m_nonStreamableAssets", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(fullDatabase.AssetLoader);
-            Dictionary<DatabaseID, UnitBlueprint> units = (Dictionary<DatabaseID, UnitBlueprint>)typeof(LandfallContentDatabase).GetField("m_unitBlueprints", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(database);
+            var nonStreamableAssets = (Dictionary<DatabaseID, Object>)typeof(AssetLoader).GetField("m_nonStreamableAssets", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(fullDatabase.AssetLoader);
+            var units = (Dictionary<DatabaseID, UnitBlueprint>)typeof(LandfallContentDatabase).GetField("m_unitBlueprints", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(database);
 
             if (!units.ContainsKey(unit.Entity.GUID))
             {
@@ -581,8 +581,8 @@ namespace ModdingForDummies
         
         public static void AddFactionToDatabase(Faction faction)
         {
-            Dictionary<DatabaseID, Object> nonStreamableAssets = (Dictionary<DatabaseID, Object>)typeof(AssetLoader).GetField("m_nonStreamableAssets", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(fullDatabase.AssetLoader);
-            Dictionary<DatabaseID, Faction> factions = (Dictionary<DatabaseID, Faction>)typeof(LandfallContentDatabase).GetField("m_factions", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(database);
+            var nonStreamableAssets = (Dictionary<DatabaseID, Object>)typeof(AssetLoader).GetField("m_nonStreamableAssets", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(fullDatabase.AssetLoader);
+            var factions = (Dictionary<DatabaseID, Faction>)typeof(LandfallContentDatabase).GetField("m_factions", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(database);
 
             if (!factions.ContainsKey(faction.Entity.GUID))
             {
@@ -604,7 +604,7 @@ namespace ModdingForDummies
         public static void SetFlagsChildren(Transform child, HideFlags flag)
         {
             child.gameObject.hideFlags = flag;
-            for (int i = 0; i < child.childCount; i++)
+            for (var i = 0; i < child.childCount; i++)
             {
                 SetFlagsChildren(child.GetChild(i), flag);
             }

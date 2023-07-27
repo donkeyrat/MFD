@@ -122,7 +122,7 @@ namespace ModdingForDummies.TABSSimp
                 
                     if (!mAddEffect) mAddEffect = internalObject.AddComponent<MeleeWeaponAddEffect>();
                     
-                    bool effectValid = (effect != null && effect.internalObject);
+                    var effectValid = (effect != null && effect.internalObject);
 
                     if (effectValid) mAddEffect.EffectPrefab = effect.internalObject;
                     else mAddEffect.EffectPrefab = null;
@@ -166,7 +166,7 @@ namespace ModdingForDummies.TABSSimp
                         mSpawner.pos = MeleeWeaponSpawn.Pos.ContactPoint;
                     }
                     
-                    bool explosionValid = explosion != null && explosion.internalObject;
+                    var explosionValid = explosion != null && explosion.internalObject;
 
                     if (explosionValid) mSpawner.objectToSpawn = explosion.internalObject;
                     else mSpawner.objectToSpawn = null;
@@ -346,7 +346,7 @@ namespace ModdingForDummies.TABSSimp
         {
             get
             {
-                Vector3 scale = internalObject.transform.localScale;
+                var scale = internalObject.transform.localScale;
                 return (scale.x + scale.y + scale.z) / 3f;
             }
             set => internalObject.transform.localScale = Vector3.one * value;
