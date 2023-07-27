@@ -32,7 +32,7 @@ namespace ModdingForDummies
 
         public static readonly Quaternion blenderToUnity = Quaternion.Euler(-90f, 0f, 0f);
 
-        public static readonly string rootPath = Assembly.GetExecutingAssembly().Location;
+        public static readonly string rootPath = Directory.GetParent(Assembly.GetExecutingAssembly().Location)?.ToString();
         public static Dictionary<string, string> language = Localizer.GetLanguage(Localizer.Language.LANG_EN_US);
         
         public static readonly ContentDatabase fullDatabase = ContentDatabase.Instance();

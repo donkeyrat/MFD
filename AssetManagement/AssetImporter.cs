@@ -1,8 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Xml;
 using ModdingForDummies.TABSSimp;
 using Sirenix.Serialization;
@@ -92,9 +92,9 @@ namespace ModdingForDummies.AssetManagement
             
             var allMaterials = new Dictionary<string, Color>();
             var materials = root.SelectNodes("//c:library_effects/c:effect", nsmgr);
-            foreach(XmlNode materialNode in materials)
+            foreach (XmlNode materialNode in materials)
             {
-                string materialName = materialNode.GetAttr("id").Split('-')[0];
+                var materialName = materialNode.GetAttr("id").Split('-')[0];
 
                 var colorText = materialNode.SelectNodes("c:profile_COMMON/c:technique/c:lambert/c:diffuse/c:color", nsmgr).Item(0).InnerText;
 
@@ -120,13 +120,13 @@ namespace ModdingForDummies.AssetManagement
             var submeshes = new Dictionary<string, int[]>();
             foreach(XmlNode submeshNode in submeshNodes)
             {
-                string materialName = submeshNode.GetAttr("material").Split('-')[0];
+                var materialName = submeshNode.GetAttr("material").Split('-')[0];
                 var indicesText = submeshNode.SelectSingleNode("c:p", nsmgr).InnerText;
 
                 var indices = GetInts(indicesText);
                 submeshes[materialName] = indices;
             }
-            IEnumerable<int> buffer = new int[0];
+            IEnumerable<int> buffer = Array.Empty<int>();
             foreach (var array in submeshes.Values) buffer = buffer.Concat(array);
             var allIndices = buffer.ToArray();
             var vertIndices = new int[allIndices.Length / 3];
