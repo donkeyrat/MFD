@@ -179,7 +179,7 @@ namespace ModdingForDummies.AssetManagement
             foreach (var key in submeshes.Keys)
             {
                 var tripletCount = submeshes[key].Length / 3;
-                model.submeshes[0] = GenerateRange(progress, progress + tripletCount);
+                model.submeshes[o] = GenerateRange(progress, progress + tripletCount);
                 progress += tripletCount;
                 model.materials[o] = allMaterials[key];
                 o++;
