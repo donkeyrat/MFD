@@ -1,4 +1,3 @@
-
 # Modding For Dummies
 
 Modding For Dummies is a mod template that allows you to create your very own TABS mod. It contains a simplified space for you to code factions, units, weapons, abilities, and clothing items.
